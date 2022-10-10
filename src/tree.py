@@ -1,7 +1,7 @@
-from dataclasses import dataclass
 from __future__ import annotations
 from collections import deque
 from typing import Iterable
+from dataclasses import dataclass
 
 
 @dataclass

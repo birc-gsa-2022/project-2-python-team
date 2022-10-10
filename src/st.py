@@ -1,5 +1,6 @@
 import argparse
 from tree import Knæ
+
 def main():
     argparser = argparse.ArgumentParser(
         description="Exact matching using a suffix tree")
@@ -10,36 +11,45 @@ def main():
           f"in genome {args.genome.name}")
 
 def make_suffix_tree(x: str) -> None:
-    n = len(n)
+    n = len(x)
     root = Knæ(None, (0,0), {})
     current = root
     for i, char in enumerate(x):
+        print(i)
         lam=0
         j=0
         while True:
-            if lam==current.ben[1]-current.ben[0]:
+            if lam==current.ben[1]-current.ben[0] and current.ben[1]!=n-1:
                 if x[i] in current.children and x[i]!="$":
                     current=current.children[x[i]]
+                    print("a1",i)
                     lam=0
                 else:
                     current.children[x[i]]=Knæ(current,(i,n-1),i)
-                    current=root
+                    while current.parent:
+                        current=current.parent
+                    print("a",i)
                     break
-            if x[current.ben[0]+lam]==x[i]:
+            if x[current.ben[0]+lam]==x[i] and x[i]!="$":
                 i+=1
                 j+=1
                 lam+=1
-            else:                
+            else:
                 current.parent.children[x[current.ben[0]]]=Knæ(current.parent, (current.ben[0],current.ben[0]+lam-1),{x[current.ben[0]+lam]:current})
                 current.parent=current.parent.children[x[current.ben[0]]]
                 current.ben=(current.ben[0]+lam,current.ben[1])
                 current=current.parent
                 current.children[x[i]]=Knæ(current, (i,n-1),i-j)
-                current=root
+                while current.parent:
+                    current=current.parent
+                print("b",i)
                 break
+            print("c",i)
+
+    return current
 
             
-make_suffix_tree("BBBABA")
+print(make_suffix_tree("BBBABA$"))
 
 
 

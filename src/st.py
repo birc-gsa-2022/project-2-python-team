@@ -23,9 +23,10 @@ def make_suffix_tree(x: str) -> None:
                     current=current.children[x[i]]
                     lam=0
                 else:
-                    current.children[x[i]]=Knæ(current,(i,n-1),i)
-                    while current.parent:
-                        current=current.parent
+                    current.children[x[i]]=Knæ(current,(i,n-1),i-j)
+                    current=root
+                    # while current.parent:
+                    #     current=current.parent
                     break
             if x[current.ben[0]+lam]==x[i] and x[i]!="$":
                 i+=1
@@ -37,16 +38,14 @@ def make_suffix_tree(x: str) -> None:
                 current.ben=(current.ben[0]+lam,current.ben[1])
                 current=current.parent
                 current.children[x[i]]=Knæ(current, (i,n-1),i-j)
-                while current.parent:
-                    current=current.parent
+                current=root
+                # while current.parent:
+                #     current=current.parent
                 break
-
-    return current
-
-            
-print(make_suffix_tree("BBBABA$"))
+    return root
 
 
 
 if __name__ == '__main__':
+    print(make_suffix_tree("BBBABA$"))
     main()

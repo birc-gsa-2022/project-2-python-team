@@ -16,25 +16,24 @@ class Knæ:
 class SuffixTree:
     root: Knæ
 
-    def bft(self) -> Iterable[int]:
+    def bft(self, knæ: Knæ | None = None) -> Iterable[int]:
         kø = deque([])
-        kø.append(self.root)
+        if knæ is None:
+            kø.append(self.root)
+        else:
+            kø.append(knæ)
         while kø:
             element = kø.popleft()
             match element:
                 case Knæ(_, _, child):
-                    print("er knæ")
                     if type(child) == int:
-                        print("er int")
                         kø.append(child)
                     else:
-                        print("ikke int")
                         kø.extend([(child[key]) for key in child])
                 case int():
                     yield element
                 case _:
                     pass
-            print(kø)
 
 
 def construct_suffix_tree(x: str) -> None:

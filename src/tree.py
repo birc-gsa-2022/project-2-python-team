@@ -9,7 +9,7 @@ from dataclasses import dataclass
 class Knæ:
     '''
     Class for storing nodes. \n
-    Here Knæ is the node, parent is the Knæ one step toward the root, children is a dictionary of Knæ one step away from the root and ben a tuple refering to some interval in a string.
+    Here Knæ is the node, parent is the Knæ one step toward the root, children is a dictionary of Knæ one step away from the root (where the key in the dictionary represents first letter in the ben of the child) and ben a tuple refering to some interval in a string.
     '''
     parent: Knæ | None
     ben: tuple[int, int] | None

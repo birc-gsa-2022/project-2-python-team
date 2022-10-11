@@ -24,6 +24,7 @@ def main():
                 for hit in hits:
                     out.append(
                         f'{read}\t{chr}\t{hit+1}\t{len(reads[read])}M\t{reads[read]}')
+    out.sort()
     print('\n'.join(out))
 
 

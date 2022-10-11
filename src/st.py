@@ -1,5 +1,5 @@
 import argparse
-from tree import Knæ
+from tree import SuffixTree, Knæ
 
 def main():
     argparser = argparse.ArgumentParser(
@@ -10,8 +10,9 @@ def main():
     print(f"Find every reads in {args.reads.name} " +
           f"in genome {args.genome.name}")
 
-def make_suffix_tree(x: str) -> None:
+def make_suffix_tree(x: str) -> SuffixTree:
     n = len(x)
+    tree=SuffixTree()
     root = Knæ(None, (0,0), {})
     current = root
     for i, char in enumerate(x):
@@ -37,10 +38,30 @@ def make_suffix_tree(x: str) -> None:
                 current.parent.children[x[i]]=Knæ(current.parent, (i,n-1), i-j)
                 current=root
                 break
-    return root
+    tree.root=root
+    return tree
+
+def search_for_Knæ(tree:SuffixTree,x:str,p:str) -> Knæ:
+    current=tree.root
+    P=len(p)
+    i=0
+    lam=0
+    while i<P:
+            if lam==current.ben[1]-current.ben[0] and p[i] in current.children:
+                current=current.children[p[i]]
+                lam=0
+            if x[current.ben[0]+lam]==p[i]:
+                i+=1
+                lam+=1
+            else:
+                return None
+    return current
+
 
 
 
 if __name__ == '__main__':
-    print(make_suffix_tree("BB$"))
-    main()
+    x="BB$"
+    yes=make_suffix_tree("BB$")
+    print(yes)
+    print(search_for_Knæ(yes,x,"B"))

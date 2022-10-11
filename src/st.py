@@ -17,35 +17,30 @@ def make_suffix_tree(x: str) -> None:
     for i, char in enumerate(x):
         lam=0
         j=0
-        while True:
+        while i<n:
             if lam==current.ben[1]-current.ben[0] and current.ben[1]!=n-1:
-                if x[i] in current.children and x[i]!="$":
+                if x[i] in current.children:
                     current=current.children[x[i]]
                     lam=0
                 else:
                     current.children[x[i]]=Knæ(current,(i,n-1),i-j)
                     current=root
-                    # while current.parent:
-                    #     current=current.parent
                     break
-            if x[current.ben[0]+lam]==x[i] and x[i]!="$":
+            if x[current.ben[0]+lam]==x[i]:
                 i+=1
                 j+=1
                 lam+=1
             else:
-                current.parent.children[x[current.ben[0]]]=Knæ(current.parent, (current.ben[0],current.ben[0]+lam-1),{x[current.ben[0]+lam]:current})
+                current.parent.children[x[current.ben[0]]]=Knæ(current.parent, (current.ben[0],current.ben[0]+lam),{x[current.ben[0]+lam]:current})
                 current.parent=current.parent.children[x[current.ben[0]]]
                 current.ben=(current.ben[0]+lam,current.ben[1])
-                current=current.parent
-                current.children[x[i]]=Knæ(current, (i,n-1),i-j)
+                current.parent.children[x[i]]=Knæ(current.parent, (i,n-1), i-j)
                 current=root
-                # while current.parent:
-                #     current=current.parent
                 break
     return root
 
 
 
 if __name__ == '__main__':
-    print(make_suffix_tree("BBBABA$"))
+    print(make_suffix_tree("BB$"))
     main()

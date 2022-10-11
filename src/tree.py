@@ -75,7 +75,7 @@ class SuffixTree:
         lam = 0
         while i < P:
             if type(current.children) == int:
-                return [current.children]
+                pass
             elif lam == current.ben[1]-current.ben[0] and p[i] in current.children:
                 current = current.children[p[i]]
                 lam = 0

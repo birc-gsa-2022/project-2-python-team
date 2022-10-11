@@ -1,3 +1,4 @@
+'''Module for handling suffix trees'''
 from __future__ import annotations
 from collections import deque
 from typing import Iterable
@@ -61,7 +62,7 @@ class SuffixTree:
 
     def bft(self, knæ: Knæ | None = None) -> Iterable[int]:
         '''
-        Generator for Breadth-first-traversal of node (class: Knæ) yielding all integers (indices) downstream of that node. If no node (Knæ) is provided, the function simple does a breadth-first-traversal of the entire tree.
+        Generator for breadth-first-traversal of node (class: Knæ) yielding all integers (indices) downstream of that node. If no node (Knæ) is provided, the function simply does a breadth-first-traversal of the entire tree.
         '''
         kø = deque([])
         if knæ is None:

@@ -3,6 +3,8 @@ from collections import deque
 from typing import Iterable
 from dataclasses import dataclass
 
+from st import make_suffix_tree
+
 
 @dataclass
 class Knæ:
@@ -14,18 +16,25 @@ class Knæ:
 class SuffixTree:
     root: Knæ
 
-    def bft(self) -> Iterable[tuple[int, int]]:
-        kø = deque([self.root])
+    def bft(self) -> Iterable[int]:
+        kø = deque([])
+        kø.append(self.root)
         while kø:
-            match kø.popleft():
-                case Knæ(_, ben, child):
-                    kø.append(ben)
-                    if child is not int:
-                        kø.append([child[key] for key in child])
-                case tuple(i, j):
-                    yield (i, j)
+            element = kø.popleft()
+            match element:
+                case Knæ(_, _, child):
+                    print("er knæ")
+                    if type(child) == int:
+                        print("er int")
+                        kø.append(child)
+                    else:
+                        print("ikke int")
+                        kø.extend([(child[key]) for key in child])
+                case int():
+                    yield element
                 case _:
                     pass
+            print(kø)
 
 
 def construct_suffix_tree(x: str) -> None:

@@ -9,3 +9,7 @@ p = 'BA'
 tree = SuffixTree(x)
 
 print(tree.search_for_pattern(p))
+
+
+def test_1984():
+    assert 2+2 == 4

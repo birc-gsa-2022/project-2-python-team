@@ -28,6 +28,8 @@ Most difficulties we had were in early implemetation choices for our Knæ class,
 ## Correctness
 
 *Describe experiments that verifies the correctness of your implementations.*
+We couldnt come up with a good idea for testing just the construction, but if the tree is constructed correctly the search should output the same matches as the naive implementation of exact pattern matching. 
+We generated test data and compared outputs from our ST implementation with the naive pattern matching, to verifiy correctness. Furthermore we also tried with empty strings, just in case something went wierd
 
 
 ## Running time
@@ -36,3 +38,5 @@ Most difficulties we had were in early implemetation choices for our Knæ class,
 
 *If you have graphs that show the running time--you probably should have--you can embed them here like we did in the previous project.*
 
+We generated 2 series of data for the running time, one series using increasing N (input string length), at three different choices of M (pattern length), the other using three choices of N, and varieng M. the relation between lines in the resulting plots should reveal the time complexity.
+After looking at the graph for data generated from a markov chain, (which had the smallest value for M take the longest), we remembered that search times are also affected by the pattern itself, and so we realized that it would be more reliable to use same letter strings for our running time experiments. 

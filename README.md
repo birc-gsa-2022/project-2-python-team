@@ -29,7 +29,7 @@ Most difficulties we had were in early implemetation choices for our Knæ class,
 
 *Describe experiments that verifies the correctness of your implementations.*
 
-We couldnt come up with a good idea for testing just the construction, but if the tree is constructed correctly the search should output the same matches as the naive implementation of exact pattern matching. 
+We could not come up with a good idea for testing just the construction, but if the tree is constructed correctly the search should output the same matches as the naive implementation of exact pattern matching. 
 We generated test data and compared outputs from our ST implementation with the naive pattern matching, to verifiy correctness. Furthermore we also tried with empty strings, just in case something went wierd. For palindromes, markov, random and single letter, the output seemed correct. biggest problem was that it was not necessarily in the same order, but we don't care about that.
 
 
@@ -39,7 +39,30 @@ We generated test data and compared outputs from our ST implementation with the 
 
 *If you have graphs that show the running time--you probably should have--you can embed them here like we did in the previous project.*
 
-We generated 2 series of data for the running time, one series using increasing N (input string length), at three different choices of M (pattern length), the other using three choices of N, and varieng M. the relation between lines in the resulting plots should reveal the time complexity.
-After looking at the graph for data generated from a markov chain, (which had the smallest value for M take the longest), we remembered that search times are also affected by the pattern itself, and so we realized that it would be more reliable to use same letter strings for our running time experiments. 
+We generated 2 series of data for the running time, one series using increasing N (input string length), at three different choices of M (pattern length), the other keeping N constant and varying M. The relation between lines in the resulting plots should reveal the time complexity.
 
-![](figs/graph_1.png)
+When running the code on strings only consisting of 'A's with varying lengths of sequences we see a clear O(n^2) time complexity for the contruction of trees.
+
+![](figs/identical_contruct.png)
+
+The same time complexity is evident for a Markov-chain-generated string (see data_gen.py, DNA_markov() for generation related details), although it is more dependent of the sequence.
+
+![](figs/markov_construct.png)
+
+When looking at time complexities for the search algorithm the results are more obscure. 
+
+![](identical_search.png)
+
+The time complexity should be O(m) (m being pattern length), but it seems the short inputs run faster. We attribute this to the breath-first-traversal in our implimentation of the search algorithm. If the string is short we have to report many more occurences and thus go though more nodes to get there. The same pattern is seen for a markov-chain-generated sequence as shown below.
+
+![](figs/markov_search.png)
+
+Here the shortest pattern appears often in the sequence, and thus takes much longer to report.
+
+
+
+
+
+
+
+

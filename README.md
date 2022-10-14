@@ -41,3 +41,5 @@ We generated test data and compared outputs from our ST implementation with the 
 
 We generated 2 series of data for the running time, one series using increasing N (input string length), at three different choices of M (pattern length), the other using three choices of N, and varieng M. the relation between lines in the resulting plots should reveal the time complexity.
 After looking at the graph for data generated from a markov chain, (which had the smallest value for M take the longest), we remembered that search times are also affected by the pattern itself, and so we realized that it would be more reliable to use same letter strings for our running time experiments. 
+
+![](figs/graph_1.png)
